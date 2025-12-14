@@ -30,28 +30,43 @@ function updateThemeIcon(theme) {
 // Mobile Menu Toggle
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+
+function openMobileMenu() {
+    // Measure content height to avoid jumpy animation on some devices
+    navMenu.classList.add('active');
+    navOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    const icon = mobileMenuToggle.querySelector('i');
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-times');
+}
+
+function closeMobileMenu() {
+    navMenu.classList.remove('active');
+    navOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+    const icon = mobileMenuToggle.querySelector('i');
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
+}
 
 mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    const icon = mobileMenuToggle.querySelector('i');
-    
     if (navMenu.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
+        closeMobileMenu();
     } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+        openMobileMenu();
     }
 });
+
+// Close when tapping overlay
+navOverlay.addEventListener('click', closeMobileMenu);
 
 // Close mobile menu when clicking on a link
 const navLinks = document.querySelectorAll('.nav-link');
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        const icon = mobileMenuToggle.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+        closeMobileMenu();
     });
 });
 

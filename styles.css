@@ -108,6 +108,7 @@ body {
     font-size: 1.5rem;
     color: var(--text-color);
     cursor: pointer;
+    z-index: 1002; /* Above theme toggle */
 }
 
 .nav-menu {
@@ -719,27 +720,46 @@ body {
     }
 
     .nav-menu {
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 60px;
         left: 0;
         width: 100%;
         background: var(--card-bg);
         flex-direction: column;
         gap: 0;
-        padding: 1rem 0;
+        padding: 0;
         box-shadow: var(--shadow);
         max-height: 0;
         overflow: hidden;
+        border-top: 1px solid var(--border-color);
         transition: max-height 0.3s ease;
+        z-index: 1000;
     }
 
     .nav-menu.active {
-        max-height: 500px;
+        max-height: 80vh; /* Large enough to fit items */
     }
 
     .nav-link {
         padding: 1rem 2rem;
         width: 100%;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Dim background when menu is open */
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 999;
+    }
+
+    .nav-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .hero-title {
@@ -789,11 +809,14 @@ body {
         font-size: 2rem;
     }
 
+    /* Move theme toggle away from hamburger to prevent overlap */
     .theme-toggle {
         top: 15px;
-        right: 15px;
+        right: auto;
+        left: 15px;
         width: 45px;
         height: 45px;
+        z-index: 1001;
     }
 }
 
