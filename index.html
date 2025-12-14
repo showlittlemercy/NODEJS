@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Complete Documentation - Learn Node.js</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/eclipse.min.css">
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fab fa-node-js"></i>
+                <span>Node.js Docs</span>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#introduction" class="nav-link">Introduction</a></li>
+                <li><a href="#getting-started" class="nav-link">Getting Started</a></li>
+                <li><a href="#core-concepts" class="nav-link">Core Concepts</a></li>
+                <li><a href="#modules" class="nav-link">Modules</a></li>
+                <li><a href="#live-demo" class="nav-link">Live Demo</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Master Node.js</h1>
+            <p class="hero-subtitle">Your Complete Guide to Server-Side JavaScript</p>
+            <div class="hero-buttons">
+                <a href="#getting-started" class="btn btn-primary">Get Started</a>
+                <a href="#live-demo" class="btn btn-secondary">Try Live Demo</a>
+            </div>
+        </div>
+        <div class="hero-animation">
+            <div class="floating-code">
+                <code>const express = require('express');</code>
+            </div>
+            <div class="floating-code delayed">
+                <code>app.listen(3000);</code>
+            </div>
+            <div class="floating-code more-delayed">
+                <code>console.log('Server running!');</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction Section -->
+        <section id="introduction" class="content-section">
+            <h2 class="section-title">What is Node.js?</h2>
+            <div class="card">
+                <p>Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside a web browser. Built on Chrome's V8 JavaScript engine, Node.js enables developers to use JavaScript for server-side scripting.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast & Efficient</h3>
+                        <p>Non-blocking I/O model makes it lightweight and efficient</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h3>JavaScript Everywhere</h3>
+                        <p>Use the same language for both frontend and backend</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-boxes"></i>
+                        <h3>Rich Ecosystem</h3>
+                        <p>npm provides access to thousands of reusable packages</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Active Community</h3>
+                        <p>Large community support and continuous development</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started Section -->
+        <section id="getting-started" class="content-section">
+            <h2 class="section-title">Getting Started</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-download"></i> Installation</h3>
+                <p>Download and install Node.js from the official website:</p>
+                <div class="code-block">
+                    <pre><code># Check if Node.js is installed
+node --version
+
+# Check npm version
+npm --version</code></pre>
+                </div>
+                <a href="https://nodejs.org/" target="_blank" class="btn btn-link">Download Node.js</a>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-play"></i> Your First Node.js Application</h3>
+                <p>Create a file named <code>app.js</code> and add the following code:</p>
+                <div class="code-block">
+                    <pre><code>// app.js
+console.log('Hello, Node.js!');
+
+// Create a simple HTTP server
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World from Node.js!');
+});
+
+server.listen(3000, () => {
+    console.log('Server running at http://localhost:3000/');
+});</code></pre>
+                </div>
+                <p>Run your application:</p>
+                <div class="code-block">
+                    <pre><code>node app.js</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section id="core-concepts" class="content-section">
+            <h2 class="section-title">Core Concepts</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-sync-alt"></i> Event Loop</h3>
+                <p>The event loop is what allows Node.js to perform non-blocking I/O operations despite JavaScript being single-threaded.</p>
+                <div class="code-block">
+                    <pre><code>// Example of asynchronous operation
+console.log('First');
+
+setTimeout(() => {
+    console.log('Second (after 1 second)');
+}, 1000);
+
+console.log('Third');
+
+// Output: First, Third, Second</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-stream"></i> Asynchronous Programming</h3>
+                
+                <h4>Callbacks</h4>
+                <div class="code-block">
+                    <pre><code>const fs = require('fs');
+
+fs.readFile('file.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log(data);
+});</code></pre>
+                </div>
+
+                <h4>Promises</h4>
+                <div class="code-block">
+                    <pre><code>const fs = require('fs').promises;
+
+fs.readFile('file.txt', 'utf8')
+    .then(data => console.log(data))
+    .catch(err => console.error(err));</code></pre>
+                </div>
+
+                <h4>Async/Await</h4>
+                <div class="code-block">
+                    <pre><code>const fs = require('fs').promises;
+
+async function readFileContent() {
+    try {
+        const data = await fs.readFile('file.txt', 'utf8');
+        console.log(data);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+readFileContent();</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-buffer"></i> Buffers and Streams</h3>
+                
+                <h4>Buffers</h4>
+                <p>Buffers are used to handle binary data in Node.js.</p>
+                <div class="code-block">
+                    <pre><code>// Creating buffers
+const buf1 = Buffer.from('Hello World');
+const buf2 = Buffer.alloc(10);
+
+console.log(buf1.toString()); // Hello World
+console.log(buf1.length); // 11</code></pre>
+                </div>
+
+                <h4>Streams</h4>
+                <p>Streams are objects that let you read data from a source or write data to a destination continuously.</p>
+                <div class="code-block">
+                    <pre><code>const fs = require('fs');
+
+// Readable stream
+const readStream = fs.createReadStream('input.txt');
+readStream.on('data', (chunk) => {
+    console.log('Received chunk:', chunk);
+});
+
+// Writable stream
+const writeStream = fs.createWriteStream('output.txt');
+writeStream.write('Hello, ');
+writeStream.write('World!');
+writeStream.end();
+
+// Pipe streams
+readStream.pipe(writeStream);</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-tasks"></i> Event Emitters</h3>
+                <p>Many Node.js objects emit events. The EventEmitter class is used to handle events.</p>
+                <div class="code-block">
+                    <pre><code>const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+
+// Register event listener
+myEmitter.on('event', (data) => {
+    console.log('Event occurred!', data);
+});
+
+// Emit event
+myEmitter.emit('event', { message: 'Hello!' });</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Section -->
+        <section id="modules" class="content-section">
+            <h2 class="section-title">Node.js Modules</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-puzzle-piece"></i> Module System</h3>
+                <p>Node.js uses CommonJS module system. You can also use ES6 modules.</p>
+                
+                <h4>CommonJS (require/exports)</h4>
+                <div class="code-block">
+                    <pre><code>// math.js
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+module.exports = { add, subtract };
+
+// app.js
+const math = require('./math');
+console.log(math.add(5, 3)); // 8</code></pre>
+                </div>
+
+                <h4>ES6 Modules (import/export)</h4>
+                <div class="code-block">
+                    <pre><code>// math.mjs
+export function add(a, b) {
+    return a + b;
+}
+
+export function subtract(a, b) {
+    return a - b;
+}
+
+// app.mjs
+import { add, subtract } from './math.mjs';
+console.log(add(5, 3)); // 8</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-folder-open"></i> File System (fs)</h3>
+                <div class="code-block">
+                    <pre><code>const fs = require('fs');
+
+// Synchronous read
+const data = fs.readFileSync('file.txt', 'utf8');
+
+// Asynchronous read
+fs.readFile('file.txt', 'utf8', (err, data) => {
+    if (err) throw err;
+    console.log(data);
+});
+
+// Write file
+fs.writeFile('output.txt', 'Hello World', (err) => {
+    if (err) throw err;
+    console.log('File saved!');
+});
+
+// Check if file exists
+fs.access('file.txt', fs.constants.F_OK, (err) => {
+    console.log(err ? 'File does not exist' : 'File exists');
+});</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-folder"></i> Path Module</h3>
+                <div class="code-block">
+                    <pre><code>const path = require('path');
+
+console.log(path.join('/users', 'john', 'documents'));
+// /users/john/documents
+
+console.log(path.resolve('file.txt'));
+// Full absolute path
+
+console.log(path.extname('file.txt')); // .txt
+console.log(path.basename('/users/john/file.txt')); // file.txt
+console.log(path.dirname('/users/john/file.txt')); // /users/john</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-server"></i> HTTP Module</h3>
+                <div class="code-block">
+                    <pre><code>const http = require('http');
+
+const server = http.createServer((req, res) => {
+    // Handle different routes
+    if (req.url === '/') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Home Page</h1>');
+    } else if (req.url === '/api') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'API Response' }));
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.end('<h1>404 Not Found</h1>');
+    }
+});
+
+server.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-network-wired"></i> URL Module</h3>
+                <div class="code-block">
+                    <pre><code>const url = require('url');
+
+const myUrl = new URL('https://example.com:8080/path?id=123&name=John#section');
+
+console.log(myUrl.href); // Full URL
+console.log(myUrl.protocol); // https:
+console.log(myUrl.hostname); // example.com
+console.log(myUrl.port); // 8080
+console.log(myUrl.pathname); // /path
+console.log(myUrl.search); // ?id=123&name=John
+console.log(myUrl.searchParams.get('id')); // 123</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-terminal"></i> OS Module</h3>
+                <div class="code-block">
+                    <pre><code>const os = require('os');
+
+console.log('Platform:', os.platform());
+console.log('CPU Architecture:', os.arch());
+console.log('CPUs:', os.cpus().length);
+console.log('Free Memory:', os.freemem());
+console.log('Total Memory:', os.totalmem());
+console.log('Home Directory:', os.homedir());
+console.log('Uptime:', os.uptime(), 'seconds');</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-cogs"></i> Process Object</h3>
+                <div class="code-block">
+                    <pre><code>// Environment variables
+console.log(process.env.NODE_ENV);
+
+// Command line arguments
+console.log(process.argv);
+
+// Current working directory
+console.log(process.cwd());
+
+// Process ID
+console.log(process.pid);
+
+// Exit process
+process.exit(0);
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+    process.exit(1);
+});</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-child"></i> Child Processes</h3>
+                <div class="code-block">
+                    <pre><code>const { spawn, exec, fork } = require('child_process');
+
+// Using spawn
+const ls = spawn('ls', ['-lh', '/usr']);
+ls.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+});
+
+// Using exec
+exec('cat *.js', (error, stdout, stderr) => {
+    if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
+
+// Using fork (for Node.js files)
+const child = fork('child.js');
+child.send({ hello: 'world' });
+child.on('message', (msg) => {
+    console.log('Message from child:', msg);
+});</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-shield-alt"></i> Crypto Module</h3>
+                <div class="code-block">
+                    <pre><code>const crypto = require('crypto');
+
+// Generate random bytes
+const randomBytes = crypto.randomBytes(16).toString('hex');
+console.log(randomBytes);
+
+// Create hash
+const hash = crypto.createHash('sha256')
+    .update('Hello World')
+    .digest('hex');
+console.log(hash);
+
+// Create HMAC
+const hmac = crypto.createHmac('sha256', 'secret-key')
+    .update('Hello World')
+    .digest('hex');
+console.log(hmac);
+
+// Encryption and Decryption
+const algorithm = 'aes-256-cbc';
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+const cipher = crypto.createCipheriv(algorithm, key, iv);
+let encrypted = cipher.update('Hello World', 'utf8', 'hex');
+encrypted += cipher.final('hex');
+
+const decipher = crypto.createDecipheriv(algorithm, key, iv);
+let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+decrypted += decipher.final('utf8');</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- NPM Section -->
+        <section id="npm" class="content-section">
+            <h2 class="section-title">NPM (Node Package Manager)</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-box"></i> What is NPM?</h3>
+                <p>npm is the world's largest software registry. It consists of a command-line client and an online database of packages.</p>
+                
+                <h4>Basic Commands</h4>
+                <div class="code-block">
+                    <pre><code># Initialize a new project
+npm init
+npm init -y  # Skip questions
+
+# Install a package
+npm install express
+npm i express  # Shorthand
+
+# Install as dev dependency
+npm install --save-dev nodemon
+npm i -D nodemon  # Shorthand
+
+# Install globally
+npm install -g nodemon
+
+# Uninstall a package
+npm uninstall express
+
+# Update packages
+npm update
+
+# List installed packages
+npm list
+npm list -g  # Global packages</code></pre>
+                </div>
+
+                <h4>package.json</h4>
+                <div class="code-block">
+                    <pre><code>{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "My Node.js application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest"
+  },
+  "keywords": ["nodejs", "app"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Express.js Section -->
+        <section id="express" class="content-section">
+            <h2 class="section-title">Express.js Framework</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-rocket"></i> Introduction to Express</h3>
+                <p>Express is a minimal and flexible Node.js web application framework that provides robust features for web and mobile applications.</p>
+                
+                <div class="code-block">
+                    <pre><code># Install Express
+npm install express</code></pre>
+                </div>
+
+                <h4>Basic Express Server</h4>
+                <div class="code-block">
+                    <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.get('/api/users', (req, res) => {
+    res.json([
+        { id: 1, name: 'John' },
+        { id: 2, name: 'Jane' }
+    ]);
+});
+
+app.post('/api/users', (req, res) => {
+    const newUser = req.body;
+    res.status(201).json(newUser);
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});</code></pre>
+                </div>
+
+                <h4>Middleware</h4>
+                <div class="code-block">
+                    <pre><code>// Custom middleware
+const logger = (req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+};
+
+app.use(logger);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});</code></pre>
+                </div>
+
+                <h4>Routing</h4>
+                <div class="code-block">
+                    <pre><code>// Router
+const router = express.Router();
+
+router.get('/', (req, res) => {
+    res.send('Users home');
+});
+
+router.get('/:id', (req, res) => {
+    res.send(`User ${req.params.id}`);
+});
+
+router.post('/', (req, res) => {
+    res.send('Create user');
+});
+
+app.use('/api/users', router);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Database Section -->
+        <section id="database" class="content-section">
+            <h2 class="section-title">Working with Databases</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-database"></i> MongoDB with Mongoose</h3>
+                <div class="code-block">
+                    <pre><code>// Install mongoose
+// npm install mongoose
+
+const mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/myapp', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+// Define schema
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    age: Number,
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Create model
+const User = mongoose.model('User', userSchema);
+
+// CRUD Operations
+async function createUser() {
+    const user = new User({
+        name: 'John Doe',
+        email: 'john@example.com',
+        age: 30
+    });
+    await user.save();
+}
+
+async function getUsers() {
+    const users = await User.find();
+    return users;
+}
+
+async function updateUser(id) {
+    const user = await User.findByIdAndUpdate(
+        id,
+        { age: 31 },
+        { new: true }
+    );
+    return user;
+}
+
+async function deleteUser(id) {
+    await User.findByIdAndDelete(id);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-table"></i> MySQL</h3>
+                <div class="code-block">
+                    <pre><code>// Install mysql2
+// npm install mysql2
+
+const mysql = require('mysql2/promise');
+
+async function connectDatabase() {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'password',
+        database: 'mydb'
+    });
+
+    // Query
+    const [rows] = await connection.execute(
+        'SELECT * FROM users WHERE id = ?',
+        [1]
+    );
+
+    // Insert
+    await connection.execute(
+        'INSERT INTO users (name, email) VALUES (?, ?)',
+        ['John', 'john@example.com']
+    );
+
+    await connection.end();
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-layer-group"></i> PostgreSQL</h3>
+                <div class="code-block">
+                    <pre><code>// Install pg
+// npm install pg
+
+const { Pool } = require('pg');
+
+const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'mydb',
+    password: 'password',
+    port: 5432,
+});
+
+async function queryDatabase() {
+    const client = await pool.connect();
+    try {
+        const result = await client.query('SELECT * FROM users');
+        console.log(result.rows);
+    } finally {
+        client.release();
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Authentication Section -->
+        <section id="authentication" class="content-section">
+            <h2 class="section-title">Authentication & Security</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-key"></i> JWT Authentication</h3>
+                <div class="code-block">
+                    <pre><code>// npm install jsonwebtoken bcrypt
+
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+// Hash password
+async function hashPassword(password) {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+}
+
+// Compare password
+async function comparePassword(password, hash) {
+    return await bcrypt.compare(password, hash);
+}
+
+// Generate token
+function generateToken(user) {
+    return jwt.sign(
+        { id: user.id, email: user.email },
+        'your-secret-key',
+        { expiresIn: '24h' }
+    );
+}
+
+// Verify token middleware
+function authenticateToken(req, res, next) {
+    const token = req.header('Authorization')?.split(' ')[1];
+    
+    if (!token) {
+        return res.status(401).json({ message: 'Access denied' });
+    }
+
+    try {
+        const verified = jwt.verify(token, 'your-secret-key');
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(400).json({ message: 'Invalid token' });
+    }
+}
+
+// Usage
+app.post('/api/register', async (req, res) => {
+    const hashedPassword = await hashPassword(req.body.password);
+    // Save user with hashed password
+});
+
+app.post('/api/login', async (req, res) => {
+    // Find user and compare password
+    const isValid = await comparePassword(password, user.password);
+    if (isValid) {
+        const token = generateToken(user);
+        res.json({ token });
+    }
+});
+
+app.get('/api/protected', authenticateToken, (req, res) => {
+    res.json({ message: 'Protected route', user: req.user });
+});</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESTful APIs Section -->
+        <section id="rest-api" class="content-section">
+            <h2 class="section-title">Building RESTful APIs</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-exchange-alt"></i> REST API Best Practices</h3>
+                <div class="code-block">
+                    <pre><code>const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// GET - Retrieve all resources
+app.get('/api/products', async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// GET - Retrieve single resource
+app.get('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        res.json(product);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// POST - Create new resource
+app.post('/api/products', async (req, res) => {
+    try {
+        const product = new Product(req.body);
+        await product.save();
+        res.status(201).json(product);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+// PUT - Update resource
+app.put('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        res.json(product);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+// DELETE - Remove resource
+app.delete('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        res.json({ message: 'Product deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Handling Section -->
+        <section id="error-handling" class="content-section">
+            <h2 class="section-title">Error Handling</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-exclamation-triangle"></i> Error Handling Best Practices</h3>
+                <div class="code-block">
+                    <pre><code>// Custom error class
+class AppError extends Error {
+    constructor(message, statusCode) {
+        super(message);
+        this.statusCode = statusCode;
+        this.isOperational = true;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
+// Async error wrapper
+const catchAsync = (fn) => {
+    return (req, res, next) => {
+        fn(req, res, next).catch(next);
+    };
+};
+
+// Usage
+app.get('/api/users/:id', catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+        return next(new AppError('User not found', 404));
+    }
+    res.json(user);
+}));
+
+// Global error handler
+app.use((err, req, res, next) => {
+    err.statusCode = err.statusCode || 500;
+    err.status = err.status || 'error';
+
+    if (process.env.NODE_ENV === 'development') {
+        res.status(err.statusCode).json({
+            status: err.status,
+            error: err,
+            message: err.message,
+            stack: err.stack
+        });
+    } else {
+        // Production
+        if (err.isOperational) {
+            res.status(err.statusCode).json({
+                status: err.status,
+                message: err.message
+            });
+        } else {
+            console.error('ERROR:', err);
+            res.status(500).json({
+                status: 'error',
+                message: 'Something went wrong!'
+            });
+        }
+    }
+});
+
+// Unhandled rejections
+process.on('unhandledRejection', (err) => {
+    console.log('UNHANDLED REJECTION! Shutting down...');
+    console.log(err.name, err.message);
+    process.exit(1);
+});</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testing Section -->
+        <section id="testing" class="content-section">
+            <h2 class="section-title">Testing in Node.js</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-vial"></i> Unit Testing with Jest</h3>
+                <div class="code-block">
+                    <pre><code>// npm install --save-dev jest
+
+// math.js
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+module.exports = { add, subtract };
+
+// math.test.js
+const { add, subtract } = require('./math');
+
+describe('Math functions', () => {
+    test('adds 1 + 2 to equal 3', () => {
+        expect(add(1, 2)).toBe(3);
+    });
+
+    test('subtracts 5 - 3 to equal 2', () => {
+        expect(subtract(5, 3)).toBe(2);
+    });
+});
+
+// package.json
+{
+  "scripts": {
+    "test": "jest"
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-flask"></i> API Testing with Supertest</h3>
+                <div class="code-block">
+                    <pre><code>// npm install --save-dev supertest
+
+const request = require('supertest');
+const app = require('./app');
+
+describe('GET /api/users', () => {
+    it('should return all users', async () => {
+        const res = await request(app)
+            .get('/api/users')
+            .expect(200);
+        
+        expect(Array.isArray(res.body)).toBe(true);
+    });
+});
+
+describe('POST /api/users', () => {
+    it('should create a new user', async () => {
+        const res = await request(app)
+            .post('/api/users')
+            .send({
+                name: 'John Doe',
+                email: 'john@example.com'
+            })
+            .expect(201);
+        
+        expect(res.body).toHaveProperty('id');
+        expect(res.body.name).toBe('John Doe');
+    });
+});</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Section -->
+        <section id="performance" class="content-section">
+            <h2 class="section-title">Performance Optimization</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-tachometer-alt"></i> Optimization Techniques</h3>
+                
+                <h4>Clustering</h4>
+                <div class="code-block">
+                    <pre><code>const cluster = require('cluster');
+const http = require('http');
+const numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    // Fork workers
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        cluster.fork(); // Restart worker
+    });
+} else {
+    // Workers share the same TCP connection
+    http.createServer((req, res) => {
+        res.writeHead(200);
+        res.end('Hello World\n');
+    }).listen(8000);
+
+    console.log(`Worker ${process.pid} started`);
+}</code></pre>
+                </div>
+
+                <h4>Caching</h4>
+                <div class="code-block">
+                    <pre><code>// npm install node-cache
+
+const NodeCache = require('node-cache');
+const cache = new NodeCache({ stdTTL: 600 }); // 10 minutes
+
+app.get('/api/products', async (req, res) => {
+    // Check cache
+    const cachedData = cache.get('products');
+    if (cachedData) {
+        return res.json(cachedData);
+    }
+
+    // Fetch from database
+    const products = await Product.find();
+    
+    // Store in cache
+    cache.set('products', products);
+    
+    res.json(products);
+});</code></pre>
+                </div>
+
+                <h4>Compression</h4>
+                <div class="code-block">
+                    <pre><code>// npm install compression
+
+const compression = require('compression');
+const express = require('express');
+const app = express();
+
+app.use(compression());</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- WebSockets Section -->
+        <section id="websockets" class="content-section">
+            <h2 class="section-title">Real-time Communication with WebSockets</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-plug"></i> Socket.IO</h3>
+                <div class="code-block">
+                    <pre><code>// npm install socket.io
+
+// Server
+const express = require('express');
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
+io.on('connection', (socket) => {
+    console.log('User connected:', socket.id);
+
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg); // Broadcast to all
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected:', socket.id);
+    });
+});
+
+http.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
+
+// Client (HTML)
+/*
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    
+    socket.on('chat message', (msg) => {
+        console.log('Message:', msg);
+    });
+    
+    socket.emit('chat message', 'Hello!');
+</script>
+*/</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deployment Section -->
+        <section id="deployment" class="content-section">
+            <h2 class="section-title">Deployment</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-cloud-upload-alt"></i> Deployment Checklist</h3>
+                
+                <h4>Environment Variables</h4>
+                <div class="code-block">
+                    <pre><code>// npm install dotenv
+
+// .env file
+PORT=3000
+DATABASE_URL=mongodb://localhost/myapp
+JWT_SECRET=your-secret-key
+NODE_ENV=production
+
+// Load environment variables
+require('dotenv').config();
+
+const port = process.env.PORT || 3000;
+const dbUrl = process.env.DATABASE_URL;</code></pre>
+                </div>
+
+                <h4>PM2 Process Manager</h4>
+                <div class="code-block">
+                    <pre><code># Install PM2
+npm install -g pm2
+
+# Start application
+pm2 start app.js
+
+# Start with name
+pm2 start app.js --name "my-app"
+
+# Start with cluster mode
+pm2 start app.js -i max
+
+# Monitor
+pm2 monit
+
+# Logs
+pm2 logs
+
+# Restart
+pm2 restart my-app
+
+# Stop
+pm2 stop my-app
+
+# Save configuration
+pm2 save
+
+# Startup script
+pm2 startup</code></pre>
+                </div>
+
+                <h4>Docker</h4>
+                <div class="code-block">
+                    <pre><code># Dockerfile
+FROM node:16-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm ci --only=production
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+
+# .dockerignore
+node_modules
+npm-debug.log
+.env
+.git
+
+# Build and run
+docker build -t my-node-app .
+docker run -p 3000:3000 my-node-app</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Demo Section -->
+        <section id="live-demo" class="content-section">
+            <h2 class="section-title">Live Code Editor</h2>
+            <div class="card demo-card">
+                <p>Try Node.js code live! (Simulated environment - client-side JavaScript)</p>
+                <div class="demo-container">
+                    <div class="editor-container">
+                        <div class="editor-header">
+                            <span><i class="fas fa-code"></i> Code Editor</span>
+                            <button class="btn-run" id="runCode">
+                                <i class="fas fa-play"></i> Run Code
+                            </button>
+                        </div>
+                        <textarea id="codeEditor">// Try some JavaScript code!
+console.log('Hello, Node.js!');
+
+// Example: Array methods
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+console.log('Doubled:', doubled);
+
+// Example: Arrow functions
+const greet = (name) => {
+    return `Hello, ${name}!`;
+};
+console.log(greet('Developer'));
+
+// Example: Promises
+const fetchData = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('Data loaded!');
+        }, 1000);
+    });
+};
+
+fetchData().then(data => console.log(data));</textarea>
+                    </div>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span><i class="fas fa-terminal"></i> Output</span>
+                            <button class="btn-clear" id="clearOutput">
+                                <i class="fas fa-trash"></i> Clear
+                            </button>
+                        </div>
+                        <pre id="output"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-lightbulb"></i> Code Examples to Try</h3>
+                <div class="examples-grid">
+                    <button class="example-btn" data-example="async">Async/Await</button>
+                    <button class="example-btn" data-example="promises">Promises</button>
+                    <button class="example-btn" data-example="array">Array Methods</button>
+                    <button class="example-btn" data-example="objects">Object Manipulation</button>
+                    <button class="example-btn" data-example="classes">ES6 Classes</button>
+                    <button class="example-btn" data-example="destructuring">Destructuring</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="content-section">
+            <h2 class="section-title">Additional Resources</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-book"></i> Official Documentation</h3>
+                <ul class="resource-list">
+                    <li><a href="https://nodejs.org/docs/" target="_blank">Node.js Official Docs</a></li>
+                    <li><a href="https://www.npmjs.com/" target="_blank">npm Registry</a></li>
+                    <li><a href="https://expressjs.com/" target="_blank">Express.js Documentation</a></li>
+                    <li><a href="https://mongoosejs.com/" target="_blank">Mongoose Documentation</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-graduation-cap"></i> Learning Resources</h3>
+                <ul class="resource-list">
+                    <li><a href="https://nodejs.dev/learn" target="_blank">Node.js Learning Guide</a></li>
+                    <li><a href="https://github.com/goldbergyoni/nodebestpractices" target="_blank">Node.js Best Practices</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=Oe421EPjeBE" target="_blank">Node.js Full Course (freeCodeCamp)</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-tools"></i> Useful Tools & Libraries</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h4>nodemon</h4>
+                        <p>Auto-restart on file changes</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>dotenv</h4>
+                        <p>Environment variable management</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>express</h4>
+                        <p>Web application framework</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>mongoose</h4>
+                        <p>MongoDB object modeling</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>joi</h4>
+                        <p>Data validation</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>axios</h4>
+                        <p>HTTP client</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>socket.io</h4>
+                        <p>Real-time communication</p>
+                    </div>
+                    <div class="tool-card">
+                        <h4>winston</h4>
+                        <p>Logging library</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Node.js Documentation</h4>
+                <p>Your comprehensive guide to mastering Node.js development</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                    <li><a href="#modules">Modules</a></li>
+                    <li><a href="#live-demo">Live Demo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Creator</h4>
+                <p><strong>Priyanshu</strong></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:showlittlemercy@gmail.com">showlittlemercy@gmail.com</a></p>
+                <div class="social-links">
+                    <a href="https://github.com/showlittlemercy" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/priyanshu-thakur-a47774360/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/showlittlemercy/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Node.js Documentation. Created by <strong>Priyanshu</strong> | Built with ❤️ for developers.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
